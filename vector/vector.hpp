@@ -6,7 +6,7 @@
 /*   By: mbrija <mbrija@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 15:58:16 by mbrija            #+#    #+#             */
-/*   Updated: 2022/03/16 16:16:38 by mbrija           ###   ########.fr       */
+/*   Updated: 2022/03/16 16:18:47 by mbrija           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ public:
 	// ALLOCATOR
 	/*
 	get allocator
+	*/
+	// NMF
+	/*
+	swap
+	relational operators
 	*/
 	
 };
