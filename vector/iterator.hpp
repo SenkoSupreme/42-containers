@@ -6,7 +6,7 @@
 /*   By: mbrija <mbrija@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:58:44 by mbrija            #+#    #+#             */
-/*   Updated: 2022/05/19 12:34:14 by mbrija           ###   ########.fr       */
+/*   Updated: 2022/05/19 18:49:07 by mbrija           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <algorithm> 
 
 template <class T>
-class iterator
+class Iterator
 {
 public:
     typedef T value_type;
@@ -27,14 +27,120 @@ private:
     /* data */
     pointer ptr;
 
-Public:
-    iterator(/* args */) : ptr();
-    iterator(pointer p) : ptr(p);
+public:
+    Iterator(/* args */) : ptr() {}
+    Iterator(pointer p) : ptr(p) {}
+    const value_type*	base() const
+	{
+		return ptr;
+	}
+	value_type*	base()
+	{
+		return ptr;
+	}
     template <typename S>
-    iterator &operator= (const iterator<S> &p)
+    Iterator &operator= (const Iterator<S> &p)
     {
-        
+        ptr = p.base();
+        return *this;
     }
-    ~iterator();
+    template <typename S>
+    Iterator &operator= (const Iterator<S> &p) const
+    {
+        Iterator i(it);
+        return i;
+    }
+    ~Iterator() {}
+
+
+    /** Comparision **/
+    template <typename S>
+	bool operator==(const Iterator<S> &it)
+	{
+		if (this->ptr == it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator!=(const Iterator<S> &it)
+	{
+		if (this->ptr != it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator<(const Iterator<S> &it)
+	{
+		if (this->ptr < it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator>(const Iterator<S> &it)
+	{
+		if (this->ptr > it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator>=(const Iterator<S> &it)
+	{
+		if (this->ptr >= it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator<=(const Iterator<S> &it)
+	{
+		if (this->ptr <= it.base())
+			return true;
+		return false;
+	}
+
+    /** Overloading Comparision OPs to Accept consts **/
+    template <typename S>
+	bool operator==(const Iterator<S> &it) const
+	{
+		if (this->ptr == it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator!=(const Iterator<S> &it) const
+	{
+		if (this->ptr != it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator<(const Iterator<S> &it) const
+	{
+		if (this->ptr < it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator>(const Iterator<S> &it) const
+	{
+		if (this->ptr > it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator>=(const Iterator<S> &it) const
+	{
+		if (this->ptr >= it.base())
+			return true;
+		return false;
+	}
+	template <typename S>
+	bool operator<=(const Iterator<S> &it) const
+	{
+		if (this->ptr <= it.base())
+			return true;
+		return false;
+	}
+
+    /** next**/
     
 };
