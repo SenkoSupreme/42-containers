@@ -6,7 +6,7 @@
 /*   By: mbrija <mbrija@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 11:58:44 by mbrija            #+#    #+#             */
-/*   Updated: 2022/05/19 18:49:07 by mbrija           ###   ########.fr       */
+/*   Updated: 2022/05/21 13:02:46 by mbrija           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,59 +38,58 @@ public:
 	{
 		return ptr;
 	}
-    template <typename S>
-    Iterator &operator= (const Iterator<S> &p)
+    template <typename V>
+    Iterator &operator= (const Iterator<V> &p)
     {
         ptr = p.base();
         return *this;
     }
-    template <typename S>
-    Iterator &operator= (const Iterator<S> &p) const
+    template <typename V>
+    Iterator &operator= (const Iterator<V> &p) const
     {
         Iterator i(it);
         return i;
     }
     ~Iterator() {}
 
-
     /** Comparision **/
-    template <typename S>
-	bool operator==(const Iterator<S> &it)
+    template <typename V>
+	bool operator==(const Iterator<V> &it)
 	{
 		if (this->ptr == it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator!=(const Iterator<S> &it)
+	template <typename V>
+	bool operator!=(const Iterator<V> &it)
 	{
 		if (this->ptr != it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator<(const Iterator<S> &it)
+	template <typename V>
+	bool operator<(const Iterator<V> &it)
 	{
 		if (this->ptr < it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator>(const Iterator<S> &it)
+	template <typename V>
+	bool operator>(const Iterator<V> &it)
 	{
 		if (this->ptr > it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator>=(const Iterator<S> &it)
+	template <typename V>
+	bool operator>=(const Iterator<V> &it)
 	{
 		if (this->ptr >= it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator<=(const Iterator<S> &it)
+	template <typename V>
+	bool operator<=(const Iterator<V> &it)
 	{
 		if (this->ptr <= it.base())
 			return true;
@@ -98,49 +97,154 @@ public:
 	}
 
     /** Overloading Comparision OPs to Accept consts **/
-    template <typename S>
-	bool operator==(const Iterator<S> &it) const
+    template <typename V>
+	bool operator==(const Iterator<V> &it) const
 	{
 		if (this->ptr == it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator!=(const Iterator<S> &it) const
+	template <typename V>
+	bool operator!=(const Iterator<V> &it) const
 	{
 		if (this->ptr != it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator<(const Iterator<S> &it) const
+	template <typename V>
+	bool operator<(const Iterator<V> &it) const
 	{
 		if (this->ptr < it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator>(const Iterator<S> &it) const
+	template <typename V>
+	bool operator>(const Iterator<V> &it) const
 	{
 		if (this->ptr > it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator>=(const Iterator<S> &it) const
+	template <typename V>
+	bool operator>=(const Iterator<V> &it) const
 	{
 		if (this->ptr >= it.base())
 			return true;
 		return false;
 	}
-	template <typename S>
-	bool operator<=(const Iterator<S> &it) const
+	template <typename V>
+	bool operator<=(const Iterator<V> &it) const
 	{
 		if (this->ptr <= it.base())
 			return true;
 		return false;
 	}
 
-    /** next**/
+    /** Dereferencing **/
+    reference operator*() { return *ptr; }
+	reference operator*() const { return *ptr; }
+
+	void operator*(T ptr_val) { *ptr = ptr_val; }
+	pointer operator->() { return ptr; }
+	pointer operator->() const { return ptr; }
+    
+    /**Post and Pre incrementing**/
+    Iterator &operator++()
+	{
+		ptr++;
+		return *this;
+	}
+	Iterator operator++(int)
+	{
+		Iterator tmp;
+		tmp = *this;
+		this->ptr++;
+		return (tmp);
+	}
+	Iterator &operator--()
+	{
+		this->ptr--;
+		return *this;
+	}
+	Iterator operator--(int)
+	{
+		Iterator tmp;
+		tmp = *this;
+		this->ptr--;
+		return (tmp);
+	}
+    
+    /**Basic Arithmtic OPs **/
+    Iterator operator+(dif_type n)
+	{
+		Iterator tmp = *this;
+		tmp += n;
+		return tmp;
+	}
+	const Iterator operator+(dif_type n) const
+	{
+		Iterator tmp = *this;
+		tmp += n;
+		return tmp;
+	}
+	Iterator operator-(dif_type n)
+	{
+		Iterator tmp = *this;
+		tmp -= n;
+		return tmp;
+	}
+	const Iterator operator-(dif_type n) const
+	{
+		Iterator tmp = *this;
+		tmp -= n;
+		return tmp;
+	}
+	dif_type operator-(const Iterator &it)
+	{
+		return ptr - it.ptr;
+	}
+
+	Iterator &operator+=(dif_type n)
+	{
+		ptr += n;
+		return (*this);
+	}
+	Iterator operator+=(dif_type n) const
+	{
+		Iterator iter = *this;
+		iter += n;
+		return (iter);
+	}
+	Iterator &operator-=(dif_type n)
+	{
+		ptr -= n;
+		return (*this);
+	}
+	Iterator operator-=(dif_type n) const
+	{
+		Iterator iter = *this;
+		iter -= n;
+		return (iter);
+	}
+	reference operator[](dif_type n)
+	{
+		return ptr[n];
+	}
+	const T& operator[](dif_type n) const
+	{
+		return ptr[n];
+	}
+    
+    template<typename V>
+    Iterator<V>	operator+(ptrdiff_t n, const Iterator<V> &it)
+    {
+        return it + n;
+    }
+
+    template<typename V>
+    Iterator<V>	operator-(ptrdiff_t n, const Iterator<V> &it)
+    {
+        return it - n;
+    }
     
 };
