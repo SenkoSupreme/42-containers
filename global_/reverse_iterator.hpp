@@ -110,6 +110,7 @@ namespace ft
         }
 
     };
+    // end of reverse iterator class
 
     template <class Iterator>
     bool operator== (const reverse_iterator<Iterator>& lhs, const reverse_iterator<Iterator>& rhs)
