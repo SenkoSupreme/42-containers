@@ -420,6 +420,7 @@ namespace ft
 			}
 			return position;
 		}
+
 		void insert (iterator position, size_type n, const value_type& val)
 		{
 			Vector tmp;
@@ -456,6 +457,7 @@ namespace ft
 			}
 			swap(tmp);
 		}
+
 		template <class InputIterator>
     	void insert (iterator position, InputIterator first, InputIterator last, typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
 		{

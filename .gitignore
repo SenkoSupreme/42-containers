@@ -1,3 +1,4 @@
 *out
-*.out.dSYM
+*.out.dSYM/*
+test/*.out.dSYM/*
 tests/*out.dSYM
